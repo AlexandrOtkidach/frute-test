@@ -368,3 +368,39 @@ img.first-section_bg-basket {
 .first-section_bottom-block:not(:last-child) {
     border-right: 2px solid rgba(219, 30, 70, 0.1);
 }
+
+
+
+.first-section_parallax img {
+  position: absolute;
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+.first-section {
+    position: relative;
+    overflow: hidden;
+}
+
+img.fruit-parallax-1 {
+    bottom: 0;
+    right: -60px;
+    width: 13.7%;
+}
+
+img.fruit-parallax-2 {
+    top: 0px;
+    right: -25px;
+    width: 6.1%;
+}
+
+img.fruit-parallax-3 {
+    top: 0;
+    left: -70px;
+    width: 11.2%;
+}
+
+img.fruit-parallax-4 {
+    bottom: 125px;
+    left: 50%;
+    width: 7.7%;
+}
