@@ -51,3 +51,13 @@ function initParallaxForImages(selector, defaultIntensity = 20, defaultDirection
   });
 }
 initParallaxForImages('.first-section_parallax img', 25, "normal");
+
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+
+  if (window.scrollY > 0) {
+    header.classList.add('scroll');
+  } else {
+    header.classList.remove('scroll');
+  }
+});

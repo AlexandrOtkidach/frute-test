@@ -35,8 +35,16 @@ body{
     }
 }
 
-
-
+.header,
+main{
+    transition:all 0.4s;
+}
+.header.scroll {
+    transform:translateY(-45px)
+}
+body:has(.header.scroll) main {
+     transform:translateY(-45px)
+}
 
 .header-top {
     box-shadow: 0px 3px 11px 0px rgba(0, 0, 0, 0.07);
@@ -117,9 +125,28 @@ a.header-top_social-block:hover .header-top_social-block__icon svg{
     font-weight: 500;
     color: #fff;
     background: rgba(219, 30, 70, 1);
-    padding: 6px 17px;
+    padding: 4px 15px;
     border-radius: 12px;
     cursor: pointer;
+    transition: all 0.4s;
+    border: 2px solid rgba(219, 30, 70, 1)
+}
+
+.header-top_call-button:hover {
+    color: #db1e46;
+    background: #fff;
+    animation: callMeAnim 3s ease-in;
+}
+@keyframes callMeAnim{
+    0%,30% {
+        rotate: 0deg;
+    }
+    5%, 15%, 25% {
+        rotate: 3deg;
+    }
+    10%, 20% {
+        rotate: -3deg;
+    }
 }
 
 .header-top_social-block__icon {
@@ -217,15 +244,66 @@ a.header-bottom_logo-link:hover img.header-bottom_logo-link__image-2{
     border-radius: 50px;
     cursor: pointer;
     margin-left: 20px;
+    transition: all 0.4s;
+    position: relative;
+}
+.header-bottom_search:before{
+    content:'';
+    position:absolute;
+    width:0px;
+    height:1px;
+    background:#fff;
+    left: 0;
+    opacity: 0;
+    transition:all 0.4s;
+    bottom:16px;
+    transition-delay: 0s;
+}
+
+.header-bottom_search:hover {
+    padding-left:200px;
+    width:260px;
+    background: #db1e46;
+}
+.header-bottom_search:hover:before{
+    width:170px;
+    left: 30px;
+    opacity:1;
+    transition-delay: 0.2s;
+}
+
+.header-bottom_search svg path{
+    transition: all 0.4s;
+}
+
+.header-bottom_search:hover svg path{
+    fill: #fff;
 }
 
 .header-bottom_basket {
     position: relative;
-    padding: 15px 15px 15px 20px;
+    padding: 13px 13px 13px 18px;
     background: rgba(219, 30, 70, 1);
     color: #fff;
     border-radius: 50px;
     cursor: pointer;
+    border: 2px solid rgba(219, 30, 70, 1);
+    transition: all 0.4s;
+}
+
+.header-bottom_basket:hover {
+    background:#fff;
+}
+.header-bottom_basket .header-bottom_basket-price,
+.header-bottom_basket .header-bottom_basket-price svg path{
+    transition:all 0.4s;
+}
+
+.header-bottom_basket:hover .header-bottom_basket-price {
+    color:#db1e46
+}
+.header-bottom_basket:hover .header-bottom_basket-price svg path{
+    fill:#db1e46;
 }
 
 .header-bottom_basket-price {
@@ -247,10 +325,42 @@ a.header-bottom_logo-link:hover img.header-bottom_logo-link__image-2{
     right: -8px;
     box-shadow: 0px 0px 0px 3px #fff;
     line-height: 120%;
+    transition:all 0.4s;
 }
+.header-bottom_basket:hover .header-bottom_basket-count {
+    rotate:360deg;
+}
+
 
 a.header-top_social-block:not(:last-child) {
     border-right: 2px solid rgba(219, 30, 70, 0.1);
+}
+.header-top_social-block-text,
+.header-bottom_nav a .header-bottom_nav-text{
+    transition: all 0.4s;
+    position:relative;
+}
+.header-bottom_nav a .header-bottom_nav-text:after,
+.header-top_social-block-text:after{
+    background: #db1e46;
+    bottom: -2px;
+    content: "";
+    display: block;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+    transform-origin: center;
+    transition: all .4s;
+    width: 0;
+}
+a.header-top_social-block:hover .header-top_social-block-text:after,
+.header-bottom_nav a:hover .header-bottom_nav-text:after{
+    width:100%;
+}
+
+a.header-top_social-block:hover .header-top_social-block-text{
+    color:#db1e46;
 }
 
 .header-bottom_nav a {
@@ -275,7 +385,7 @@ header.header {
     z-index: 100;
 }
 .first-section_bg {
-    background: url('/images/bg.png') center center / cover no-repeat;
+    background: url('images/bg.png') center center / cover no-repeat;
     position: relative;
     height: calc(100vh - 215px);
     overflow: hidden;
@@ -323,29 +433,44 @@ img.first-section_bg-basket {
 .first-section_bg-content a {
     font-family: "Varela Round", sans-serif;
     background: rgba(251, 196, 0, 1);
-    background-image: url('/images/wave.png');
-    background-position: right;
+    background-image: url('images/wave.png');
+    background-position: 5px -5px;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: rgba(221, 35, 67, 1);
     text-decoration: none;
-    padding: 24px 83px;
+    padding: 20px 79px;
     font-size: 27px;
     border-radius: 80px;
     position: relative;
     display: block;
     width: fit-content;
+    transition: all 0.4s;
+    border: 4px solid rgba(251, 196, 0, 1)
+}
+.first-section_bg-content a:hover {
+    color: #fff;
+    background: transparent;
+    background-image: url(images/wave-hover.png);
+    background-size: cover;
+    background-position: 5px -5px;
+    background-repeat: no-repeat;
 }
 
 .first-section_bottom>.container {
     margin: auto;
 }
-
+.first-section_bottom-shadow{
+    position: relative;
+    transform: translateY(-50%);
+    box-shadow: 0px 15px 80px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 30px;
+}
 .first-section_bottom-content {
     display: flex;
     border: 2px solid rgba(219, 30, 70, 1);
     background: #fff;
     box-shadow: 0 0 0 5px #fff;
-    position: relative;
-    transform: translateY(-50%);
     border-radius: 30px;
     padding: 24px 30px;
 }
@@ -391,12 +516,14 @@ img.fruit-parallax-2 {
     top: 0px;
     right: -25px;
     width: 6.1%;
+    z-index: 101;
 }
 
 img.fruit-parallax-3 {
     top: 0;
     left: -70px;
     width: 11.2%;
+    z-index: 101;
 }
 
 img.fruit-parallax-4 {
