@@ -26,9 +26,30 @@ function initParallaxForImages(
     return { x: 1, y: 1 };
   };
 
+  let targetX = 0;
+  let targetY = 0;
+
+  let currentX = 0;
+  let currentY = 0;
+
+  const lerp = (start, end, amount) => start + (end - start) * amount;
+
   document.addEventListener("mousemove", (e) => {
     const normX = e.clientX / window.innerWidth - 0.5;
     const normY = e.clientY / window.innerHeight - 0.5;
+
+    targetX = normX;
+    targetY = normY;
+  });
+
+  document.addEventListener("mouseleave", () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  function animate() {
+    currentX = lerp(currentX, targetX, 0.07); 
+    currentY = lerp(currentY, targetY, 0.07);
 
     images.forEach((img) => {
       const depth = img.dataset.depth ? parseFloat(img.dataset.depth) : 1;
@@ -40,19 +61,18 @@ function initParallaxForImages(
         ? getDirection(img.dataset.direction)
         : getDirection(defaultDirection);
 
-      img.style.transform = `
-        translate(
-          ${normX * intensity * depth * dir.x}px,
-          ${normY * intensity * depth * dir.y}px
-        )
-      `;
-    });
-  });
+      const x = currentX * intensity * depth * dir.x;
+      const y = currentY * intensity * depth * dir.y;
 
-  document.addEventListener("mouseleave", () => {
-    images.forEach((img) => (img.style.transform = "translate(0,0)"));
-  });
+      img.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
+
 initParallaxForImages(
   ".first-section_parallax img,.second-section_parallax img",
   25,
